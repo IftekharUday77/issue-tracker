@@ -3,7 +3,7 @@ import { Table } from "@radix-ui/themes";
 import IssuesActions from "./IssuesActions";
 
 const LoadingIssuesPage = () => {
-  const issues = [1, 2, 3, 4, 5];
+  const issues = [1, 2, 3, 4, 5, 6];
 
   return (
     <div>
