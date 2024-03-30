@@ -1,3 +1,9 @@
+import { Text } from "@radix-ui/themes";
+
 export default function Home() {
-  return <div>Issue Tracker</div>;
+  return (
+    <div>
+      <Text size="9">Issue Tracker</Text>
+    </div>
+  );
 }
