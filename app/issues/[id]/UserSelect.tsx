@@ -22,19 +22,21 @@ const UserSelect = ({ issue }: { issue: Issue }) => {
   if (isLoading) return <Skeleton></Skeleton>;
   if (error) return null;
 
+  const assignIssue = (userId: string) => {
+    axios
+      .patch("/api/issues/" + issue.id, {
+        assignedToUserID: userId || null,
+      })
+      .catch(() => {
+        toast.error("Changes could not be saved");
+      });
+  };
+
   return (
     <>
       <Select.Root
         defaultValue={issue.assignedToUserID || ""}
-        onValueChange={(userId) => {
-          axios
-            .patch("/api/issues/" + issue.id, {
-              assignedToUserID: userId || null,
-            })
-            .catch(() => {
-              toast.error("Changes could not be saved");
-            });
-        }}
+        onValueChange={assignIssue}
       >
         <Select.Trigger></Select.Trigger>
         <Select.Content>
