@@ -23,7 +23,7 @@ const UserSelect = () => {
 
   return (
     <Select.Root>
-      <Select.Trigger placeholder="Assign..."></Select.Trigger>
+      <Select.Trigger placeholder="Assign a user..."></Select.Trigger>
       <Select.Content>
         <Select.Group>
           <Select.Label>Users</Select.Label>
