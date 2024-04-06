@@ -5,6 +5,7 @@ import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Skeleton } from "@/app/components";
+import toast, { Toaster } from "react-hot-toast";
 
 const UserSelect = ({ issue }: { issue: Issue }) => {
   const {
@@ -22,27 +23,34 @@ const UserSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null;
 
   return (
-    <Select.Root
-      defaultValue={issue.assignedToUserID || ""}
-      onValueChange={(userId) => {
-        axios.patch("/api/issues/" + issue.id, {
-          assignedToUserID: userId || null,
-        });
-      }}
-    >
-      <Select.Trigger></Select.Trigger>
-      <Select.Content>
-        <Select.Group>
-          <Select.Label>Assign Issue...</Select.Label>
-          <Select.Item value="">Unassigned</Select.Item>
-          {users?.map((user) => (
-            <Select.Item key={user.id} value={user.id}>
-              {user.name}
-            </Select.Item>
-          ))}
-        </Select.Group>
-      </Select.Content>
-    </Select.Root>
+    <>
+      <Select.Root
+        defaultValue={issue.assignedToUserID || ""}
+        onValueChange={(userId) => {
+          axios
+            .patch("/api/issues/" + issue.id, {
+              assignedToUserID: userId || null,
+            })
+            .catch(() => {
+              toast.error("Changes could not be saved");
+            });
+        }}
+      >
+        <Select.Trigger></Select.Trigger>
+        <Select.Content>
+          <Select.Group>
+            <Select.Label>Assign Issue...</Select.Label>
+            <Select.Item value="">Unassigned</Select.Item>
+            {users?.map((user) => (
+              <Select.Item key={user.id} value={user.id}>
+                {user.name}
+              </Select.Item>
+            ))}
+          </Select.Group>
+        </Select.Content>
+      </Select.Root>
+      <Toaster></Toaster>
+    </>
   );
 };
 
