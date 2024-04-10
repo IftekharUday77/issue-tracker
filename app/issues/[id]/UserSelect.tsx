@@ -38,11 +38,11 @@ const UserSelect = ({ issue }: { issue: Issue }) => {
         defaultValue={issue.assignedToUserID || ""}
         onValueChange={assignIssue}
       >
-        <Select.Trigger></Select.Trigger>
+        <Select.Trigger placeholder="Assign to..."></Select.Trigger>
         <Select.Content>
           <Select.Group>
             <Select.Label>Assign Issue...</Select.Label>
-            <Select.Item value="">Unassigned</Select.Item>
+            <Select.Item value="unassigned">Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
                 {user.name}
