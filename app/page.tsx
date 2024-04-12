@@ -1,9 +1,16 @@
 import { Text } from "@radix-ui/themes";
+import Pagination from "./components/Pagination";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { page: string };
+}) {
   return (
-    <div>
-      <Text size="9">Issue Tracker</Text>
-    </div>
+    <Pagination
+      itemCount={100}
+      pageSize={10}
+      currentPage={parseInt(searchParams.page)}
+    ></Pagination>
   );
 }
